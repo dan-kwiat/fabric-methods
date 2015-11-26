@@ -1,7 +1,10 @@
-from fabric.api import run, env
+from fabric.api import run, env, local
 
 env.use_ssh_config = True
 
+
+def ssh_tunnel(remote_host='awshost'):
+	local("""ssh -L 8080:localhost:3000 %s""" % remote_host)
 
 def install_git():
 	run("""sudo apt-get install -y git-core""")
